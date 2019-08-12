@@ -11,7 +11,102 @@
 
 
 
-<script>
+	<!-- jQuery/jQueryUI (hosted) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+
+		<!-- Optional: Reflection -->
+		<script type="text/javascript" src="reflection.js"></script>
+
+		<!-- interpolate, depends on jQ 1.8.0+ -->
+		<script src="jquery.interpolate.min.js"></script>
+
+		<!-- Coverflow -->
+		<script src="jquery.coverflow.js"></script>
+
+		<style>
+			body {
+				font-family: "Segoe UI", Verdana, Helvetica, Arial, sans-serif;
+				font-size: 11px;
+			}
+
+			.coverflow {
+				height: 100px;
+				border-bottom: solid 2px black;
+			}
+
+			.coverflow .cover {
+				width: 100px;
+				height: 100px;
+				cursor: pointer;
+				font-size: 500%;
+				border: solid 2px black;
+				text-align: center;
+
+				background: #e2e2e2; /* Old browsers */
+				/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+				background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UyZTJlMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2RiZGJkYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2QxZDFkMSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWZlZmUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+				background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-8 */
+			}
+
+			.coverflow .cover.current {
+				opacity: 1;
+				border-bottom: none;
+
+				box-shadow:	0 0 16px rgba(0,0,0,.5);
+
+				background: #ffffff; /* Old browsers */
+				/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+				background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2YzZjNmMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2VkZWRlZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+				background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+				background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
+			}
+			.coverflow .cover.current:after {
+				content:			' ';
+				background-color:	white;
+				display:			block;
+				position:			absolute;
+				width:				132px;
+				height:				16px;
+				left:				-16px;
+				bottom:				-16px;
+			}
+
+			/* CD covers */
+			.photos .cover {
+				cursor: pointer;
+				/*-webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255, 255, 255, .5)));*/
+			}
+
+			#photos-info {
+				position:		relative;
+				text-align:		center;
+				z-index:		1000;
+				text-shadow:	0 0 8px white;
+			}
+
+			#photos-name {
+				font-size: 200%;
+				font-weight: bold;
+			}
+
+			.clearfix {
+				clear: both;
+			}
+		</style>
+
+		<script>
 			$(function() {
 
 				// Alphabet
@@ -84,38 +179,93 @@
 
 
     <body>
-	<div style="position:absolute;background:rgba(255,255,255,.75);z-index:1000;padding:10px">
-			<button id="first">first</button>
-			<button id="last">last</button>
-		</div>
-
-
-
-
-
-
-
-
-
-
 <div class="photos" autofocus>
-			<img class="cover" data-name="Attic" src="demo/attic.jpg"/>
-			<img class="cover" data-name="Aurora Borealis" src="demo/aurora.jpg"/>
-			<img class="cover" data-name="Barbecued steak" src="demo/barbecue.jpg"/>
-			<img class="cover" data-name="Black swan" src="demo/blackswan.jpg"/>
-			<img class="cover" data-name="Chess" src="demo/chess.jpg"/>
-			<img class="cover" data-name="Fire" src="demo/fire.jpg"/>
-			<img class="cover" data-name="Keyboard" src="demo/keyboard.jpg"/>
-			<img class="cover" data-name="Locomotive" src="demo/locomotive.jpg"/>
-			<img class="cover" data-name="Novo-Diveevo monastery" src="demo/diveevo.jpg"/>
-			<img class="cover" data-name="Person" src="demo/person.jpg"/>
-			<img class="cover" data-name="Rose" src="demo/rose.jpg"/>
-			<img class="cover" data-name="Seagull" src="demo/seagull.jpg"/>
-			<img class="cover" data-name="Solar power" src="demo/solarpower.jpg"/>
+
+			<img class="cover" data-name="Tip One" src="pics/tip.png"/>
+			<img class="cover" data-name="Tip Two" src="pics/tip1.png"/>
+			<img class="cover" data-name="Tip Three" src="pics/tip2.jpg"/>
+			<img class="cover" data-name="Tip Four" src="pics/tip3.jpg"/>
+			<img class="cover" data-name="Tip Six" src="pics/tip5.png"/>
+
 		</div>
 		<div id="photos-info">
 			<div id="photos-name"></div>
 		</div>
+
+
+
+
+
+<br>
+<br>
+<br>
+
+<h1> Moderate Time Management </h1>
+
+<h3>Why to improve your time management</h3>
+<p>When you learn and maintain good time management skills, you’ll find freedom from deadline pressure and from stress in general. You’ll be more productive, procrastinate less, and have more time to relax, which helps further decrease stress and anxiety.
+</p>
+
+<div id="em">
+<h3>Eisenhower Matrix</h3>
+
+<ol>
+<li>Do
+Do, consists of your most important tasks. The activities which need to be done urgently. The tasks with a deadline approaching or the ones that cannot be delayed generally fall in this category.For putting tasks in this category, you need to thoroughly analyze your priorities first and then decide if it fits with the do it now criteria. If the task needs to be done within a day, or no longer than next day, it is an urgent task. Do.it.now!
+</li>
+
+<li>Decide
+It constitutes of the tasks which are important, but not necessarily urgent. This could include an array of responsibilities ranging from professional emails, follow-ups, to more personal appointments and commitments.Tasks in this quadrant need to be scheduled for some other time.
+</li>
+
+<li>Delegate
+refers to the tasks which are not important, but urgent. Although it sounds counter-intuitive, because naturally your first instinct would be that aren’t tasks which are urgent, important too? Not necessarily!These activities generally give you the deception of being important, while in reality they don’t really contribute much towards your productivity.
+</li>
+
+<li>Eliminate
+These consists of tasks that are essentially your productivity killers. They do not contribute at all towards your goals. Identify these activities and eliminate them to give your productivity a boost.
+Common examples of these activities include mindless surfing on social media,
+</li>
+    </ol>
+</div>
+
+
+
+<div id="wbs">
+<h3>Warren Buffet Strategy</h3>
+
+<ol>
+<li>Write a list of 10-25 of your goals both professional and personal</li>
+<li>Circle your top five goals</li>
+<li>Focus on your top five goals and eliminate the others</li>
+
+
+    </ol>
+</div>
+
+<img src="pics/clock1.jpg">
+
+<div class="tips">
+<h3>Time management tips for people with moderate time management</h3>
+
+<ul>
+<li> Put a time limit on tasks.</li>
+<li>Plan your week on Sunday</li>
+<li>Create a daily plan</li>
+<li>Add a “done list” to your to-do list</li>
+<li>Complete your most important and demanding tasks first thing in the morning</li>
+<li>Block out distractions</li>
+<li>Don’t wait for inspiration - do it now</li>
+<li>Schedule breaks between tasks</li>
+<li>Make the most of waiting times</li>
+<li>Use your calendar</li>
+    </ul>
+</div>
+
+
+
+
+
 
     </body>
 </html>

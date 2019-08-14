@@ -1,5 +1,5 @@
 body{
-color: lightblue;
+background: lightblue;
 
 }
 #mtm{
@@ -30,8 +30,12 @@ img{
 position: relative;
 left:180px;
 }
-h3{text-decoration: underline;}
+h3{text-decoration: underline;
+color:red;}
 h1{
-    color:black;
+    color:red;
     text-align: center;
+}
+#idk{
+    border:4px red;
 }

@@ -26,7 +26,10 @@
 		<script src="jquery.coverflow.js"></script>
 
 		<style>
-
+body{
+    color:red;
+    background: grey;
+}
 
 			/* CD covers */
 			.photos .cover {
@@ -106,11 +109,12 @@
 <br>
 <div class="photos" autofocus>
 
-			<img class="cover" data-name="Tip One" src="pics/tip.png"/>
-			<img class="cover" data-name="Tip Two" src="pics/tip6.png"/>
-			<img class="cover" data-name="Tip Three" src="pics/tip2.jpg"/>
-			<img class="cover" data-name="Tip Four" src="pics/tip3.jpg"/>
-			<img class="cover" data-name="Tip Five" src="pics/tip5.png"/>
+			<img class="cover" data-name="Tip one"  src="pics/tip.png" width=500px/>
+			<img class="cover" data-name="Tip two" src="pics/tip6.png" width=500px />
+			<img class="cover" data-name="Tip three" src="pics/tip2.jpg" width=500px/>
+			<img class="cover" data-name="Tip four" src="pics/tip3.jpg" width=500px/>
+			<img class="cover" data-name=" Tip five" src="pics/tip5.png" width=500px/>
+            <h3> cookies </h3>
 
 		</div>
 		<div id="photos-info">
@@ -126,9 +130,17 @@
 <br>
 
 <div id="mtm">
+    <div class="container">
+  <div class="row">
+    <div class="col-sm">
 <h3>Why to improve your time management</h3>
 <p>When you learn and maintain good time management skills, you’ll find freedom from deadline pressure and from stress in general. You’ll be more productive, procrastinate less, and have more time to relax, which helps further decrease stress and anxiety.
 </p>
+  </div>
+   <div class="col-sm">
+<img src="https://spectator.imgix.net/content/uploads/2017/12/iStock-827158860.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=820&h=550">
+</div>
+  </div>
 </div>
 
 
@@ -192,7 +204,7 @@ Common examples of these activities include mindless surfing on social media,
 </div>
 
 
-
+<form id="idk">
 FirstName:<br>
 <input type="text" name="Firstname"> <br>
 
@@ -214,9 +226,9 @@ Do you believe that you have moderate time management skills?:<br>
 Did this information help you?:<br>
  <input type="radio" name="answer2" value="Yes" checked>Yes<br>
 <input type="radio" name="answer2" value="No" checked>No<br>
+  <button class="btn btn-danger" type="submit">Submit form</button>
 
-
-
+</form>
 
     </body>
 </html>
